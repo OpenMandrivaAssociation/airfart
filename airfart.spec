@@ -11,6 +11,7 @@ Source:		%{name}-v%{version}.tar.bz2
 URL:		http://airfart.sourceforge.net/
 License:	GPL
 Group:		Networking/Other
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	gtk+2-devel
 Requires:	prism2-utils gksu
 
