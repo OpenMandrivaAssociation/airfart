@@ -1,6 +1,6 @@
 %define name	airfart
 %define version	0.2.1
-%define release %mkrel 8
+%define release %mkrel 9
 
 Name: 	 	%{name}
 Summary: 	Wireless network discovery tool
