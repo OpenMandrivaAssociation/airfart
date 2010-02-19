@@ -8,6 +8,8 @@ Version: 	%{version}
 Release: 	%{release}
 
 Source:		%{name}-v%{version}.tar.bz2
+Patch0:		airfart-v0.2.1-fix-gcc43.patch
+Patch1:		airfart-v0.2.1-fix-link.patch
 URL:		http://airfart.sourceforge.net/
 License:	GPL
 Group:		Networking/Other
@@ -26,9 +28,12 @@ collection at the bottom tier and a graphical user interface at the top.
 
 %prep
 %setup -q -n %name
+%patch0 -p0
+%patch1 -p0 -b .link
 
 %build
-%make C_FLAGS="-g $RPM_OPT_FLAGS"
+%make C_FLAGS="-g %optflags" LDFLAGS="%{ldflags}"
+
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%_bindir
