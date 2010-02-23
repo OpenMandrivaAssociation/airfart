@@ -6,12 +6,11 @@ Name: 	 	%{name}
 Summary: 	Wireless network discovery tool
 Version: 	%{version}
 Release: 	%{release}
-
 Source:		%{name}-v%{version}.tar.bz2
 Patch0:		airfart-v0.2.1-fix-gcc43.patch
 Patch1:		airfart-v0.2.1-fix-link.patch
 URL:		http://airfart.sourceforge.net/
-License:	GPL
+License:	GPLv2
 Group:		Networking/Other
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	gtk+2-devel
