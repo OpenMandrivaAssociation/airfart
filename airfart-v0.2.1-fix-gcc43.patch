@@ -1,0 +1,11 @@
+--- src/vendor.cpp.gcc	2010-02-19 11:18:25.000000000 +0100
++++ src/vendor.cpp	2010-02-19 11:19:54.000000000 +0100
+@@ -16,6 +16,8 @@
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+ 
++#include <cstdio>
++#include <cstring>
+ #include "vendor.h"
+ 
+ Vendor:: Vendor()

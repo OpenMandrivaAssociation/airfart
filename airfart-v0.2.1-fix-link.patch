@@ -1,0 +1,20 @@
+--- Makefile.link	2003-03-10 18:23:47.000000000 +0100
++++ Makefile	2010-02-19 11:25:02.000000000 +0100
+@@ -11,7 +11,7 @@
+ SHAREDIR=$(DESTDIR)/usr/share/airfart
+ PIXMAPDIR=$(DESTDIR)/usr/share/pixmaps/airfart
+ INSTALL = /usr/bin/install -D
+-LINK_FLAGS = -lnsl -lpthread -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 `pkg-config gtk+-2.0 --libs gthread-2.0` 	
++LIBS = -lnsl -lpthread -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 `pkg-config gtk+-2.0 --libs gthread-2.0` 	
+ INCLUDES = -I. \
+ 	   -I/usr/include/gtk-2.0 \
+ 	   -I/usr/lib/gtk-2.0/include \
+@@ -27,7 +27,7 @@
+ 
+ # program executable *********
+ airfart: src/main.o src/framesniffer.o src/stats.o src/address.o src/vendor.o src/getopts.o src/about.o src/config.o src/prefs.o src/gui.o src/interface.o 
+-	g++ $(LINK_FLAGS) -o $(EXE_NAME) src/main.o src/framesniffer.o src/stats.o src/address.o src/vendor.o src/getopts.o src/about.o src/config.o src/prefs.o src/gui.o src/interface.o 
++	g++ $(LDFLAGS) -o $(EXE_NAME) src/main.o src/framesniffer.o src/stats.o src/address.o src/vendor.o src/getopts.o src/about.o src/config.o src/prefs.o src/gui.o src/interface.o $(LIBS)
+ 
+ #Back end stuff
+ src/framesniffer.o: src/framesniffer.cpp src/framesniffer.h 
