@@ -1,20 +1,18 @@
-%define name	airfart
-%define version	0.2.1
-%define release %mkrel 10
-
-Name: 	 	%{name}
-Summary: 	Wireless network discovery tool
-Version: 	%{version}
-Release: 	%{release}
+Name:		airfart
+Summary:	Wireless network discovery tool
+Version:	0.2.1
+Release:	11
+License:	GPLv2
+Group:		Networking/Other
+URL:		http://airfart.sourceforge.net/
 Source:		%{name}-v%{version}.tar.bz2
 Patch0:		airfart-v0.2.1-fix-gcc43.patch
 Patch1:		airfart-v0.2.1-fix-link.patch
-URL:		http://airfart.sourceforge.net/
-License:	GPLv2
-Group:		Networking/Other
-BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	gtk+2-devel
-Requires:	prism2-utils gksu
+BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:	pkgconfig(pangox)
+BuildRequires:	pkgconfig(pangoxft)
+Requires:	prism2-utils
+Requires:	gksu
 
 %description
 AirFart is a wireless tool created to detect wireless devices, calculate their
@@ -31,24 +29,23 @@ collection at the bottom tier and a graphical user interface at the top.
 %patch1 -p0 -b .link
 
 %build
-%make C_FLAGS="-g %optflags" LDFLAGS="%{ldflags}"
+%make C_FLAGS="-g %{optflags}" LDFLAGS="%{ldflags}"
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/%_bindir
-mkdir -p $RPM_BUILD_ROOT/%_mandir/man1
-mkdir -p $RPM_BUILD_ROOT/%_datadir/pixmaps/%name
-mkdir -p $RPM_BUILD_ROOT/%_datadir/%name
-cp %name $RPM_BUILD_ROOT/%_bindir
-bzip2 %name.1
-cp %name.1.bz2 $RPM_BUILD_ROOT/%_mandir/man1
-cp graphics/* $RPM_BUILD_ROOT/%_datadir/pixmaps/%name
-cp manuf $RPM_BUILD_ROOT/%_datadir/%name
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_mandir}/man1
+mkdir -p %{buildroot}%{_datadir}/pixmaps/%{name}
+mkdir -p %{buildroot}%{_datadir}/%{name}
+cp %{name} %{buildroot}%{_bindir}
+bzip2 %{name}.1
+cp %{name}.1.bz2 %{buildroot}%{_mandir}/man1
+cp graphics/* %{buildroot}%{_datadir}/pixmaps/%{name}
+cp manuf %{buildroot}%{_datadir}/%{name}
 
 #menu
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{name}
 Comment=%{summary}
@@ -56,30 +53,15 @@ Exec=gksu %{_bindir}/%{name}
 Icon=networking_section
 Terminal=false
 Type=Application
-Categories=GTK;X-MandrivaLinux-System-Configuration-Networking;Settings;Network;
+Categories=GTK;Settings;Network;
 Encoding=UTF-8
 EOF
 
-%find_lang %name
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-		
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%files -f %{name}.lang
-%defattr(-,root,root)
+%files
 %doc README Authors ChangeLog TODO LICENSE
-%{_bindir}/%name
+%{_bindir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_mandir}/man1/*
-%{_datadir}/pixmaps/%name
-%{_datadir}/%name
+%{_datadir}/pixmaps/%{name}
+%{_datadir}/%{name}
+
