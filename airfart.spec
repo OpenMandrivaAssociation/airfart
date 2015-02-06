@@ -1,7 +1,7 @@
 Name:		airfart
 Summary:	Wireless network discovery tool
 Version:	0.2.1
-Release:	11
+Release:	12
 License:	GPLv2
 Group:		Networking/Other
 URL:		http://airfart.sourceforge.net/
