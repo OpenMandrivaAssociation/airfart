@@ -4,7 +4,7 @@ Version:	0.2.1
 Release:	12
 License:	GPLv2
 Group:		Networking/Other
-URL:		http://airfart.sourceforge.net/
+URL:		https://airfart.sourceforge.net/
 Source:		%{name}-v%{version}.tar.bz2
 Patch0:		airfart-v0.2.1-fix-gcc43.patch
 Patch1:		airfart-v0.2.1-fix-link.patch
